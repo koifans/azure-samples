@@ -34,12 +34,16 @@ Write-Host "Logging in...";
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 # select subscription
-Write-Host "Selecting subscription '$subscriptionId'";
-Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+$subscriptionName="Visual Studio Enterprise"
+Write-Host "Selecting subscription '$subscriptionName'";
+Get-AzureRmSubscription -Verbose
+Select-AzureRmSubscription -SubscriptionName $subscriptionName;
 
 $RgName="Rg-Simple-VM"
 New-AzureRmResourceGroup -Name $RgName -Location "China North"
 
 # Start the deployment
 Write-Host "Starting deployment...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $RgName -TemplateFile azuredeploy.json
+New-AzureRmResourceGroupDeployment -ResourceGroupName $RgName -TemplateFile azuredeploy.json -storageNamePrefix storesecure -Debug
+
+#Remove-AzureRmResourceGroup -Name $RgName
