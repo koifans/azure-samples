@@ -21,7 +21,7 @@
       "value": "MOODLE_30_STABLE"
     },
     "installOfficePlugins": {
-      "value": true
+      "value": false
     }
   }
 }
